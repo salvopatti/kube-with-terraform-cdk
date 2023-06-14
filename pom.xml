@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.mycompany.app</groupId>
+  <groupId>com.salvopatti.app</groupId>
   <artifactId>cdktf-azure</artifactId>
   <name>cdktf-azure</name>
   <version>0.1</version>
@@ -59,7 +59,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.0.0</version>
         <configuration>
-          <mainClass>com.mycompany.app.Main</mainClass>
+          <mainClass>com.salvopatti.app.Main</mainClass>
         </configuration>
       </plugin>
       <plugin>

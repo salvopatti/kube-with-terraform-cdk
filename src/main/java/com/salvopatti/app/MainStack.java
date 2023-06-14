@@ -1,16 +1,20 @@
-package com.mycompany.app;
+package com.salvopatti.app;
 
-import com.hashicorp.cdktf.TerraformStack;
+import com.hashicorp.cdktf.*;
 import com.hashicorp.cdktf.providers.azuread.application.Application;
 import com.hashicorp.cdktf.providers.azuread.provider.AzureadProvider;
 import com.hashicorp.cdktf.providers.azuread.service_principal.ServicePrincipal;
 import com.hashicorp.cdktf.providers.azuread.service_principal_password.ServicePrincipalPassword;
+import com.hashicorp.cdktf.providers.azurerm.data_azurerm_storage_account_blob_container_sas.DataAzurermStorageAccountBlobContainerSas;
 import com.hashicorp.cdktf.providers.azurerm.kubernetes_cluster.KubernetesCluster;
 import com.hashicorp.cdktf.providers.azurerm.kubernetes_cluster.KubernetesClusterDefaultNodePool;
 import com.hashicorp.cdktf.providers.azurerm.kubernetes_cluster.KubernetesClusterServicePrincipal;
 import com.hashicorp.cdktf.providers.azurerm.provider.AzurermProvider;
 import com.hashicorp.cdktf.providers.azurerm.provider.AzurermProviderFeatures;
 import com.hashicorp.cdktf.providers.azurerm.resource_group.ResourceGroup;
+import com.hashicorp.cdktf.providers.azurerm.storage_account.StorageAccount;
+import com.hashicorp.cdktf.providers.azurerm.storage_container.StorageContainer;
+import org.jetbrains.annotations.NotNull;
 import software.constructs.Construct;
 
 import java.util.Arrays;
@@ -45,16 +49,17 @@ public class MainStack extends TerraformStack {
                 .create(this, "azure")
                 .features(AzurermProviderFeatures.builder()
                         .build())
-                //.clientId("clientId")
-                //.clientSecret("ciao")
                 .build();
 
         AzureadProvider adProvider = AzureadProvider.Builder.create(this, "azuread")
                 .build();
 
-        /*KubernetesClusterServicePrincipal k8principal = KubernetesClusterServicePrincipal.builder()
-                .clientId(CLIENT_ID)
-                .clientSecret(CLIENT_SECRET).build();*/
+        /*new CloudBackend(this, CloudBackendConfig.builder()
+                .hostname("s3.bucket.aws.com")
+                .token("aaaaaaa")
+                .organization("test")
+                .workspaces(new NamedCloudWorkspace("dev-workspace"))
+                .build());*/
 
         Application app = Application.Builder.create(this, "Kapp")
                 .displayName("gdp-application").build();
@@ -71,6 +76,7 @@ public class MainStack extends TerraformStack {
                 .location(LOCATION)
                 .build();
 
+        //Builder pattern, errors about missing fields only after compilation
         KubernetesCluster aks = KubernetesCluster.Builder.create(this, "aks")
                 .name(NAME)
                 .dependsOn(Arrays.asList(resourceGroup))

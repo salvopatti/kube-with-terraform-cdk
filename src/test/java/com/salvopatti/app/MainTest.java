@@ -1,3 +1,5 @@
+package com.salvopatti.app;
+
 import com.hashicorp.cdktf.Testing;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;

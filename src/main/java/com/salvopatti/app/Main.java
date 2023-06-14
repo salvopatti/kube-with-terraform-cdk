@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.salvopatti.app;
 
 import software.constructs.Construct;
 
